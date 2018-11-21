@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数值进制数，二进制以0b开头，八进制以0o开头，十六进制以0x开头其他进制的整数，只要打印，就一定会以十进制的数显示 python中，如果显示的数字过大，对位数不确定，可以使用_来间隔，对数字本身没有影响 对浮点小数进行运算时候，可能会得到一个不精确的结果，这是所有语言都一样的。 字符串可以使用单引号或者双引号来表示。单双引号不能混合使用。单双引号不能跨行使用，不会保留字符串格式三重引号可以跨行使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础汇总">
+<meta property="og:url" content="http://yoursite.com/2018/11/02/python-基础知识/index.html">
+<meta property="og:site_name" content="liizzZ">
+<meta property="og:description" content="数值进制数，二进制以0b开头，八进制以0o开头，十六进制以0x开头其他进制的整数，只要打印，就一定会以十进制的数显示 python中，如果显示的数字过大，对位数不确定，可以使用_来间隔，对数字本身没有影响 对浮点小数进行运算时候，可能会得到一个不精确的结果，这是所有语言都一样的。 字符串可以使用单引号或者双引号来表示。单双引号不能混合使用。单双引号不能跨行使用，不会保留字符串格式三重引号可以跨行使">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-03T14:29:39.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础汇总">
+<meta name="twitter:description" content="数值进制数，二进制以0b开头，八进制以0o开头，十六进制以0x开头其他进制的整数，只要打印，就一定会以十进制的数显示 python中，如果显示的数字过大，对位数不确定，可以使用_来间隔，对数字本身没有影响 对浮点小数进行运算时候，可能会得到一个不精确的结果，这是所有语言都一样的。 字符串可以使用单引号或者双引号来表示。单双引号不能混合使用。单双引号不能跨行使用，不会保留字符串格式三重引号可以跨行使">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/02/python-基础知识/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python基础汇总 | liizzZ</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liizzZ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我们仍未知道那天所看见的花的名字</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">15</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">5</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">31</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/python-基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liizzZ">
+      <meta itemprop="description" content="liizzZ的个人博客">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liizzZ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python基础汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-02 21:15:48" itemprop="dateCreated datePublished" datetime="2018-11-02T21:15:48+08:00">2018-11-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h3><p>进制数，二进制以<code>0b</code>开头，八进制以<code>0o</code>开头，十六进制以<code>0x</code>开头<br>其他进制的整数，只要打印，就一定会以十进制的数显示</p>
+<p>python中，如果显示的数字过大，对位数不确定，可以使用<code>_</code>来间隔，对数字本身没有影响</p>
+<p>对浮点小数进行运算时候，可能会得到一个不精确的结果，这是所有语言都一样的。</p>
+<p>字符串可以使用单引号或者双引号来表示。单双引号不能混合使用。<br>单双引号不能跨行使用，不会保留字符串格式<br>三重引号可以跨行使用，并且会保留字符串格式</p>
+<p>字符串复制，可以使用“<code>abc”* 2 =====&gt; “abcabc</code>”</p>
+<p>对象是一个在内存中用来保存数据的一块区域<br>对象保存着三种数据：<code>id</code>，<code>type</code>，<code>value</code></p>
+<p><code>//</code> 表示整除运算符，这个表示一个整除操作，减去余数后得出一个最大的结果：<code>100//51=1</code></p>
+<p><strong>and or not</strong><br>python中的逻辑运算符中的与或运算符是短路的与<br>非布尔值的逻辑运算：<code>1 and 2</code>，这个表达式的返回值是2 , 而<code>0 and 2</code> 返回值是 0</p>
+<p><strong>命名空间（namespace）：</strong><br>命名空间指的是变量存储的位置，每一个变量都需要存储到指定的命名空间中，每一个作用域都有一个对应的命名空间。实际上就是一个字典</p>
+<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>列表（list）、元组（tuple）、字典（dict）、集合（set）</p>
+<p>列表可以存储任意对象，但是一般不这样做，一般列表中存储相同类型的对象，类似于java中的数组<br><code>in</code>、<code>not in</code> ：检查指定元素是否在列表中<br>列表的索引可以是负数，表示从尾部开始向前计数<br><code>del</code> ：关键字，可以删除列表中的元素</p>
+<p>元组的括号可以省略，前提是元组不为空<br>元组中的元素为一个元素时，至少需要一个逗号，不能不带逗号<br>元组的解包：把元组中的每一个值遍历赋值给一个变量：a，b，c，d = tuple，当变量数量没有元组中的元素多时，需要使用*x来获取剩余的元素，x将以列表的方式存储</p>
+<p>快速交换两个元素的值：a，b = b，a</p>
+<p>列表的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">copy()</span><br><span class="line">append()</span><br><span class="line">insrt()</span><br><span class="line">extend()</span><br><span class="line">clear()</span><br><span class="line">pop()</span><br><span class="line">remove()</span><br><span class="line">reverse()</span><br></pre></td></tr></table></figure>
+<p>字典的方法：</p>
+<ol>
+<li><code>update()</code>：将其他字典的键值对添加到当前字典，如有重复的键，则覆盖</li>
+<li><code>popitem()</code>：随机删除一个键值对，一般都是最后一个，并返回一个元组，有两个元素，分别是删除的键和值</li>
+<li><code>pop()</code></li>
+<li><code>copy()：</code></li>
+<li><code>keys()</code>：返回一个序列，保存所有的key</li>
+<li><code>values()</code>：返回所有的value</li>
+<li><code>items()</code>：返回一个序列，包含双值的子序列</li>
+</ol>
+<p>集合运算：<br><code>&amp;</code>：交集运算<br><code>|</code>：并集运算<br><code>-</code>：差集运算<br><code>^</code>：异或运算<br><code>&lt;=</code>：</p>
+<p><code>&gt;=</code>：</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数在调用的时候，解析器不会检查实参的类型，实参可以传递任意类型的对象。</p>
+<p>函数可以接受不定长的参数个数，使用*a，将不定长的参数存入一个元组中。带星号的形参只能有一个。可变参数不是必须写在所有参数的后面，但是可变参数后面的参数必须使用关键字参数的形式来传递，加“=”</p>
+<p>**形参：可以接受其他没有形参的关键字参数，他会将这些参数保存到一个字典中。必须是写在参数最后面</p>
+<p>传递实参时，可以在序列类型的参数面前加</p>
+<p>*arg：接受所有的位置参数<br>**keyargs：接受所有的关键字参数</p>
+<p>返回值：可以是任何类型，甚至可以是一个函数</p>
+<p>递归：整体思想，将一个大问题分解为一个个小问题，知道问题无法分解时，再去解决小问题<br>基线条件、递归条件</p>
+<p><code>print()</code>：输出函数，此时再次输出会换行，如果不想换行，可以：</p>
+<p><code>print(&quot;%s*%s=%s\t&quot;%(i,j,i*j),end=&quot;&quot;)</code><br><code>type()</code>：检查值的类型<br><code>isinstance()</code>：检查对象是否是类的实例<br><code>int()</code>，<code>float()</code>，<code>str()</code>，<code>bool()</code>：类型转换四个函数<br>input（“请输入内容”）：返回值是一个字符串，也可以用于暂止程序的运行<br><code>time()</code>：获取当前时间，返回值是秒<br><code>len()</code>：可以获取列表的长度，字典的键值对个数<br><code>min()</code>，<code>max()</code>：这两个函数可以获取最大最小值<br><code>range()</code>：可以用来生成自然数的序列</p>
+<p><code>dict()</code>：创建字典：d = dict（name=‘lz’，age=18）</p>
+<p><code>id()</code>：查看对象的id<br><code>help（a）</code>：内置函数，可以查询python中函数的用法，a传递的是函数对象（函数名称）</p>
+<p><code>locals()</code>：获取当前作用域的命名空间、返回值是一个字典</p>
+<p><strong>匿名函数</strong>：lambda 函数表达式（语法糖）：创建函数的又一种方式，专门用来创建一些简单的函数<br>语法：lambda 参数列表 ： 返回值</p>
+<p><strong>高阶函数</strong><br>接受一个或多个函数参数<br>返回值为函数<br>二者条件满足其一即为高阶函数</p>
+<p><code>map()</code>：可以对迭代对象中的所有元素进行操作，然后添加到一个新的对象中返回<br><code>sort()</code>：对列表中的元素进行排序，默认是比较列表的元素大小，可以接受一个关键字参数key，key需要一个函数作为参数，每次都会调用列表的元素去调用函数，然后以函数的返回值进行比较列表元素的大小，按升序排列<br><code>sorted()</code>：基本和<code>sort()</code>元素一致，但是<code>sorted</code>可以对任意序列进行排序，并且不会对原来的序列有改变，会返回一个新的序列</p>
+<p><strong>装饰器</strong>：可以对原有的函数进行功能上的扩展，在实际开发中，都是通过装饰器来进行对函数的扩展的。还可以使用类似于java注解的方式引用装饰器@装饰器，可以同时指定多个装饰器，函数会按照由内向外的顺序进行装饰。</p>
+<p><strong>方法</strong><br>方法和函数基本上是一样的，但是方法必须在使用：<code>对象.方法</code>：来调用</p>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p><code>is</code>，<code>is not</code>：比较的是对象的 id 是否相等，<code>==</code> 和<code>！=</code> 比较的是对象的value值是否相等</p>
+<p><code>global</code>：声明修饰函数内的变量作用域为全局变量，一般情况下函数内部是不允许修改全局变量的，固要此声明</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>使用类创建对象，就像调用函数一样。</p>
+<p>类也是一个对象，类就是一个用来创建对象的对象<br>类是一个type类型的对象，定义类实际上就是定义了一个type类型的对象</p>
+<p>实际上多有事物都是由两部分组成：<br>数据（属性）<br>行为（方法）</p>
+<p>类中的所有属性都是实例的共有属性</p>
+<p>在类中定义的函数被成为方法<br>类中的方法的第一个参数是调用这个方法的对象本身</p>
+<p>类中存在一些特殊方法（魔术方法）：以<code>__</code>开头，以<code>__</code>结尾，这些方法不需要对象对用，自己运行<br>特殊方法需要知道<br>什么时候调用<br>有什么作用</p>
+<p><code>类.__bases__</code> 属性可以直接获取当前类的所有父类</p>
+<p>类中的特殊方法<code>__len__()</code> ,可以在外部使用 <code>len</code> 函数获取它的长度</p>
+<p>属性、方法：<br>类属性可以通过类或类的实例获取得到，但是只能通过类对象来修改，不能通过使用类的实例对象修改<br>实例属性只能通过类实例来修改获取，无法通过类对象修改获取<br><code>@classmethod</code>修饰的的方法，是一个类方法，第一个参数是cls，cls也是会被自动传递，cls就是当前类对象<br>类方法可以通过类去调用，也可以通过实例去调用，没有区别，</p>
+<p><code>@staticmethod</code>：静态方法，不需要制定默认参数，不会自动传递默认参数。也可以被类调用或者类实例调用<br> 静态方法基本上是与当前类无关的方法，他只是一个保存当前类的函数，静态方法一般都是一些工具方法，</p>
+<p>垃圾回收<br>没有被变量引用的对象就是垃圾，python自带垃圾回收机制</p>
+<p><code>__del__（）</code>：特殊方法，在垃圾被回收前调用<br><code>__str__（）</code>：在尝试将对象转换成字符串的时候调用<br><code>__rerp__（）</code>： 对象在交互模式中直接输出的结果 </p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>引入模块：<br>1、import 【】：<br>2、from 【】 import *：</p>
+<p>一个.py 文件就是一个模块<br>as 别名：为模块起一个别名</p>
+<p><code>__name__</code> 属性：可以获取模块的名字，属性值为 <code>__main__</code> 的就是主模块</p>
+<h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>package ，包也是一个模块，普通模块是一个py文件，包是一个文件夹</p>
+<p>包中必须有一个<code>__init__.py</code> 文件，这个文件可以包含包中的主要内容</p>
+<p><code>__pycache__</code>  是模块的缓存文件包，存储临时的编译文件，二进制编码，以十六进制显示</p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> ：</span><br><span class="line">	代码块</span><br><span class="line"><span class="keyword">except</span>：</span><br><span class="line">	代码块</span><br><span class="line"><span class="keyword">else</span>：</span><br><span class="line">	代码块</span><br></pre></td></tr></table></figure>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>操作文件的步骤：</p>
+<ol>
+<li>打开文件</li>
+<li>操作文件</li>
+<li>关闭文件</li>
+</ol>
+<p>在windows下，可以使用 <code>/</code> 代替<code>\</code>  ,或者<code>\\</code>代替<code>\</code>，或者使用原始字符串：<code>r&#39;c:\another\a.txt&#39;</code></p>
+<p><code>with ... as ...</code> 语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(filename) <span class="keyword">as</span> file_obj:</span><br><span class="line">    代码块</span><br></pre></td></tr></table></figure>
+<p>open默认是以文本文件打开的，但是默认编码为None，处理文本文件时，必须指定编码方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(file, mode=<span class="string">'r'</span>, buffering=<span class="number">-1</span>, encoding_=<span class="keyword">None</span>, errors=<span class="keyword">None</span>, newline=<span class="keyword">None</span>, closefd=<span class="keyword">True</span>, opener=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file_name = a.txt</span><br><span class="line"><span class="comment"># 打开file_name对应的文件，返回一个对象，这个对象就代表了当前打开的文件</span></span><br><span class="line">file_obj = open（file_name，encoding = ‘utf<span class="number">-8</span>’）</span><br></pre></td></tr></table></figure>
+<p><code>open</code>默认是只读取文件，如要写入，需要指定参数<code>“r”“w”</code>，此时使用wirte（）函数会覆盖原有内容，“b”指定读取二进制文件，以字节为单位</p>
+<p><code>read()</code>：会直接将全部文件内容一次加载到内存</p>
+<p><code>write()</code>：返回写入字符的个数</p>
+<p><strong>读取模式</strong></p>
+<ol>
+<li>t 读取文本文件（默认值）</li>
+<li>b 读取二进制文件</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(file_name , <span class="string">'rb'</span>) <span class="keyword">as</span> file_obj:</span><br><span class="line">    <span class="comment"># 读取文本文件时，size是以字符为单位的</span></span><br><span class="line">    <span class="comment"># 读取二进制文件时，size是以字节为单位</span></span><br><span class="line">    <span class="comment"># print(file_obj.read(100))</span></span><br><span class="line">    <span class="comment"># 将读取到的内容写出来</span></span><br><span class="line">    <span class="comment"># 定义一个新的文件</span></span><br><span class="line">    new_name = <span class="string">'aa.flac'</span></span><br><span class="line">    <span class="keyword">with</span> open(new_name , <span class="string">'wb'</span>) <span class="keyword">as</span> new_obj:</span><br><span class="line">        <span class="comment"># 定义每次读取的大小</span></span><br><span class="line">        chunk = <span class="number">1024</span> * <span class="number">100</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span> :</span><br><span class="line">            <span class="comment"># 从已有的对象中读取数据</span></span><br><span class="line">            content = file_obj.read(chunk)</span><br><span class="line">            <span class="comment"># 内容读取完毕，终止循环</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> content :</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 将读取到的数据写入到新对象中</span></span><br><span class="line">            new_obj.write(content)</span><br></pre></td></tr></table></figure>
+<p><strong>读取大文件文件</strong></p>
+<ol>
+<li><code>read(num)</code>：指定每次读取的单位</li>
+<li>可以使用<code>readline()</code>，返回一行的内容</li>
+<li>可以使用<code>readlines()</code>，返回一个列表，元素是每一行的内容</li>
+<li>直接使用for循环遍历 <code>fileobj</code> ，读取的元素是每一行的内容</li>
+</ol>
+<p><strong>使用open()打开文件时必须要指定打开文件所要做的操作（读、写、追加）</strong></p>
+<p>如果不指定操作类型，则默认是 读取文件 ， 而读取文件时是不能向文件中写入的</p>
+<ol>
+<li><code>r</code> 表示只读的，如果文件不存在会报错</li>
+<li><code>w</code> 表示是可写的，使用w来写入文件时，如果文件不存在会创建文件，如果文件存在则会截断文件，截断文件指删除原来文件中的所有内容</li>
+<li><code>a</code> 表示追加内容，如果文件不存在会创建文件，如果文件存在则会向文件中追加内容</li>
+<li><code>x</code> 用来新建文件，如果文件不存在则创建，存在则报错</li>
+<li><code>+</code> 为操作符增加功能</li>
+<li><code>r+</code>，<code>w+</code>，<code>a+</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(file_name , <span class="string">'w'</span> , encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> file_obj:</span><br><span class="line"><span class="keyword">with</span> open(file_name , <span class="string">'r+'</span> , encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> file_obj:</span><br></pre></td></tr></table></figure>
+<p><code>tell()</code>：告诉当前读取到文件的位置<br><code>seek()</code>：修改当前读取到的文件，两个参数，一是切换到的位置，二是计算位置方式：0 从头开始 1从当前位置开始计算 2 从最后位置开始计算</p>
+<p><strong>其他操作</strong></p>
+<ol>
+<li><p><code>os.listdir()</code> 获取指定目录的目录结构：需要一个路径作为参数，会获取到该路径下的目录结构，默认路径为<code>./</code> 当前目录，该方法会返回一个列表，目录中的每一个文件（夹）的名字都是列表中的一个元素</p>
+</li>
+<li><p><code>os.getcwd()</code>：返回当前所在的目录</p>
+</li>
+<li><code>os.chdir()</code>：切换当前所在的目录</li>
+<li><code>os.mkdir()</code>：创建目录</li>
+<li><code>os.rmdir()</code>：删除目录</li>
+<li><code>os.remove()</code>：删除文件</li>
+<li><code>os.rename(&#39;旧名字&#39;,&#39;新名字&#39;)</code>可以对一个文件或目录进行重命名，也可以用来移动一个文件</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/python-pip安装scrapy框架报错/" rel="next" title="python-pip安装scrapy报错">
+                <i class="fa fa-chevron-left"></i> python-pip安装scrapy报错
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/04/python-Django/" rel="prev" title="python-Django框架">
+                python-Django框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="liizzZ" />
+            
+              <p class="site-author-name" itemprop="name">liizzZ</p>
+              <p class="site-description motion-element" itemprop="description">liizzZ的个人博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liizzZ" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liizzz@foxmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值"><span class="nav-number">1.</span> <span class="nav-text">数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列"><span class="nav-number">2.</span> <span class="nav-text">序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">4.</span> <span class="nav-text">关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">5.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块"><span class="nav-number">6.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包"><span class="nav-number">7.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">8.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">9.</span> <span class="nav-text">文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liizzZ</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.3.0</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
